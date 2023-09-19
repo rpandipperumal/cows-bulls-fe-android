@@ -86,7 +86,7 @@ public class PlayerActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(queueMessage.getPayload());
                     if (jsonObject.getString("toUser").equalsIgnoreCase(playerUsername)) {
                         Log.i("xxxxx", jsonObject.getString("bullsCount"));
-                        adapter.add( jsonObject.getString("word") + "Cows: " + jsonObject.getString("cowsCount") + " Bulls: "
+                        adapter.add( jsonObject.getString("word") + " Cows : " + jsonObject.getString("cowsCount") + " Bulls :  "
                                 + jsonObject.getString("bullsCount"));
                     }
                 }, throwable -> {
