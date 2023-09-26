@@ -47,7 +47,7 @@ public class PlayerActivity extends AppCompatActivity {
 
 
         editText = findViewById(R.id.editText);
-        button = findViewById(R.id.button);
+        button = findViewById(R.id.button1);
         listView = findViewById(R.id.listView);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);

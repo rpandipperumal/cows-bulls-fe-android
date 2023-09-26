@@ -1,40 +1,70 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f2f2f2"
-    android:orientation="vertical"
-    android:weightSum="4"
-    tools:context=".PlayerActivity">
+    >
 
-    <!-- EditText -->
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapCharacters"
-        android:hint="Enter a value"/>
-
-    <!-- Button -->
-
-    <!-- ListView -->
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/listView"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        android:text="@string/send_to_host" />
-
-    <ListView
-        android:id="@+id/listView"
+    <!-- Background Image or Game Board -->
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:scrollbars="vertical"/>
+        android:src="@drawable/game_board"
+        android:scaleType="fitXY" />
 
-</LinearLayout>
+    <!-- ListView Container -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/input_layout">
+
+        <!-- ListView -->
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:scrollbars="vertical" />
+
+    </FrameLayout>
+
+    <!-- Input Layout -->
+    <RelativeLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"
+        android:padding="16dp">
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/button1"
+            android:layout_toStartOf="@+id/button1"
+            android:background="#f2f2f2"
+            android:inputType="textCapCharacters"
+            android:hint="Enter a value"
+            android:padding="12dp" />
+
+        <!-- Send Button -->
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="#00B8D4"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:text="@string/send_to_host"
+            android:textColor="#F2F2F2" />
+    </RelativeLayout>
+</RelativeLayout>

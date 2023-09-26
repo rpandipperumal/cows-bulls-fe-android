@@ -60,14 +60,14 @@ public class HostActivity extends AppCompatActivity {
         String hostTopic = "/topic/" + roomName + "/host";
 
         editText = findViewById(R.id.editText1);
-        button = findViewById(R.id.button1);
+        button = findViewById(R.id.button3);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText editText = findViewById(R.id.editText1);
                 hostWord = editText.getText().toString().toUpperCase();
-                //editText.setText("");
+                editText.setText("");
                 button.setEnabled(false);
             }
         });
