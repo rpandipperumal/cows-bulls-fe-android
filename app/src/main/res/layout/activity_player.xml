@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/game_board"
+        android:src="@drawable/newcb"
         android:scaleType="fitXY" />
 
     <!-- ListView Container -->
@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
+            android:textColor="#F2F2F2"
             android:scrollbars="vertical" />
 
     </FrameLayout>

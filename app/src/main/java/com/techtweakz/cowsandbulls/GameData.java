@@ -1,6 +1,8 @@
 package com.techtweakz.cowsandbulls;
 
-public class GameData {
+import java.io.Serializable;
+
+public class GameData implements Serializable {
     private String fromUser;
 
     private String toUser;

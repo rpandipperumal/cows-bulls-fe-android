@@ -14,7 +14,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity android:name=".PlayerActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+        <activity android:name=".HostViewActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
         <activity android:name=".Main2Activity" />
         <activity
             android:name=".SignInActivity"

@@ -66,7 +66,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        playerUsername = intent.getStringExtra(Main2Activity.EXTRA_MESSAGE_PLAYER);
+        playerUsername = intent.getStringExtra(Main2Activity.PERSON_ID);
 
         roomName = intent.getStringExtra(Main2Activity.ROOM_NAME);
 

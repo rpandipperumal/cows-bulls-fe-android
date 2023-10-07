@@ -12,11 +12,9 @@
 
     public class Main2Activity extends AppCompatActivity {
 
-        public static final String EXTRA_MESSAGE = "com.techtweakz.MESSAGE";
+        public static final String PERSON_ID = "com.techtweakz.PERSON.ID";
 
         public static final String ROOM_NAME = "com.techtweakz.MESSAGE.ROOM.NAME";
-
-        public static final String EXTRA_MESSAGE_PLAYER = "com.techtweakz.MESSAGE.PLAYER";
 
         String personName;
 
@@ -47,7 +45,7 @@
             Intent intent = new Intent(Main2Activity.this, PlayerActivity.class);
             EditText editText = (EditText) findViewById(R.id.editText2);
             String message = editText.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE_PLAYER, personId);
+            intent.putExtra(PERSON_ID, personId);
             intent.putExtra(ROOM_NAME,message);
             startActivity(intent);
         }
@@ -55,9 +53,9 @@
         public void openHostActivity(View view) {
             Intent intent = new Intent(Main2Activity.this, HostActivity.class);
             EditText editText = (EditText) findViewById(R.id.editText2);
-            String message = editText.getText().toString();
-            intent.putExtra(EXTRA_MESSAGE, personId);
-            intent.putExtra(ROOM_NAME,message);
+            String roomName = editText.getText().toString();
+            intent.putExtra(PERSON_ID, personId);
+            intent.putExtra(ROOM_NAME,roomName);
             startActivity(intent);
 
         }
