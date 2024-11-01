@@ -40,6 +40,8 @@
 
         public static final String PERSON_ID = "com.techtweakz.PERSON.ID";
 
+        public static final String PERSON_NAME = "com.techtweakz.PERSON.NAME";
+
         public static final String ROOM_NAME = "com.techtweakz.MESSAGE.ROOM.NAME";
 
         public static final String TAG = "techtweakz";
@@ -49,8 +51,10 @@
         private Button button;
         private EditText editText;
 
-        String hostUsername;
+        String hostUserId;
         String roomName;
+
+        String playerName;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +62,9 @@
             setContentView(R.layout.activity_host);
 
             Intent intent = getIntent();
-            hostUsername = intent.getStringExtra(Main2Activity.PERSON_ID);
+            hostUserId = intent.getStringExtra(Main2Activity.PERSON_ID);
             roomName = intent.getStringExtra(Main2Activity.ROOM_NAME);
-
+            playerName =intent.getStringExtra(Main2Activity.PERSON_NAME);
             editText = findViewById(R.id.editText1);
             button = findViewById(R.id.button3);
 
@@ -75,7 +79,8 @@
                     button.setEnabled(false);
                     Intent intent = new Intent(HostActivity.this, HostViewActivity.class);
                     intent.putExtra(HOST_WORD, hostWord);
-                    intent.putExtra(PERSON_ID, hostUsername);
+                    intent.putExtra(PERSON_ID, hostUserId);
+                    intent.putExtra(PERSON_NAME, playerName);
                     intent.putExtra(ROOM_NAME,roomName);
                     startActivity(intent);
                 }

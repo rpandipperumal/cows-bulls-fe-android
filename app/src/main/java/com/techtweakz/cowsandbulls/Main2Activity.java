@@ -14,6 +14,8 @@
 
         public static final String PERSON_ID = "com.techtweakz.PERSON.ID";
 
+        public static final String PERSON_NAME ="com.techtweakz.person.name";
+
         public static final String ROOM_NAME = "com.techtweakz.MESSAGE.ROOM.NAME";
 
         String personName;
@@ -46,6 +48,7 @@
             EditText editText = (EditText) findViewById(R.id.editText2);
             String message = editText.getText().toString();
             intent.putExtra(PERSON_ID, personId);
+            intent.putExtra(PERSON_NAME,personName);
             intent.putExtra(ROOM_NAME,message);
             startActivity(intent);
         }
@@ -55,6 +58,7 @@
             EditText editText = (EditText) findViewById(R.id.editText2);
             String roomName = editText.getText().toString();
             intent.putExtra(PERSON_ID, personId);
+            intent.putExtra(PERSON_NAME,personName);
             intent.putExtra(ROOM_NAME,roomName);
             startActivity(intent);
 

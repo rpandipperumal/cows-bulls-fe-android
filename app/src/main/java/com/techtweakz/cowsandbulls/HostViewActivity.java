@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,8 +41,14 @@ public class HostViewActivity extends AppCompatActivity {
 
     String hostWord;
 
+    String playerName;
+
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
+
+    private HashMap<String, Integer> playerTabMap = new HashMap<>();
+
+    private HashMap<String, Integer> playerUserNameMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class HostViewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         hostUsername = intent.getStringExtra(HostActivity.PERSON_ID);
         roomName = intent.getStringExtra(HostActivity.ROOM_NAME);
+        playerName=intent.getStringExtra(HostActivity.PERSON_NAME);
 
         hostWord= intent.getStringExtra(HostActivity.HOST_WORD);
 
@@ -66,7 +74,6 @@ public class HostViewActivity extends AppCompatActivity {
 
         HashMap<String,Integer> userNameMap = new HashMap<>();
         AtomicInteger numOfPlayers = new AtomicInteger();
-        numOfPlayers.set(2);
 
         // Receive usermessage
         Disposable dispTopic = mStompClient.topic(hostTopic)
@@ -76,24 +83,51 @@ public class HostViewActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(topicMessage.getPayload());
                     Log.d(TAG, "Received " + topicMessage.getPayload());
                     GameData gameData = sendMessageToPlayer(jsonObject);
-                  /*  if(!userNameMap.containsKey(gameData.getFromUser())){
-                        userNameMap.put(gameData.getFromUser(),0);
-                        numOfPlayers.getAndIncrement();
-                    }*/
+                    // Check if the player's username is in the mapping
+                    String playerUsername = gameData.getFromUser();
+                    int tabIndex;
+                    if (playerTabMap.containsKey(playerUsername)) {
+                        tabIndex = playerTabMap.get(playerUsername);
+                    } else {
+                        // If not, assign a new tab index
+                        tabIndex = playerTabMap.size();
+                        playerTabMap.put(playerUsername, tabIndex);
+                        numOfPlayers.getAndIncrement(); // Increment the total number of players
+                    }
                     String displayWord = gameData.getWord() + " Cows : " + gameData.getCowsCount() + " Bulls : " + gameData.getBullsCount();
-                    MyPagerAdapter pagerAdapter = new MyPagerAdapter(this, numOfPlayers.get(), displayWord);
+                   // MyPagerAdapter pagerAdapter = new MyPagerAdapter(this, numOfPlayers.get(), displayWord);
+                    MyPagerAdapter pagerAdapter = new MyPagerAdapter(this, numOfPlayers.get(), tabIndex, displayWord);
                     viewPager2.setAdapter(pagerAdapter);
 
                     new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+                        // Set the tab titles here based on the player's username
+                        for (Map.Entry<String, Integer> entry : playerTabMap.entrySet()) {
+                            if (entry.getValue() == position) {
+                                tab.setText("Player " + entry.getKey());
+                                break;
+                            }
+                        }
+                    }).attach();
+
+                   /* new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
                         // Set the tab titles here (e.g., "Player 1", "Player 2", etc.)
                         tab.setText("Player " + (position + 1));
+                    }).attach();*/
+                    new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+                        // Set the tab titles here based on the player's username
+                        for (Map.Entry<String, Integer> entry : playerTabMap.entrySet()) {
+                            if (entry.getValue() == position) {
+                                tab.setText("Player " + entry.getKey());
+                                break;
+                            }
+                        }
                     }).attach();
                 }, throwable -> {
                     Log.e(TAG, "Error on subscribe topic", throwable);
                 });
-        if (compositeDisposable != null) {
+  /*      if (compositeDisposable != null) {
             compositeDisposable.dispose();
-        }
+        }*/
         compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(dispTopic);
     }
@@ -110,10 +144,6 @@ public class HostViewActivity extends AppCompatActivity {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
-        // String displayWord = gameData.getWord() + "Cows : " + gameData.getCowsCount() + "Bulls : " + gameData.getBullsCount();
-
-        // adapter.add(displayWord);
 
         mStompClient.send("/app/sendToPlayerv2", gameDataJson).subscribe();
 
@@ -142,6 +172,7 @@ public class HostViewActivity extends AppCompatActivity {
         GameData gameData = new GameData();
         gameData.setFromUser(hostUsername);
         gameData.setRoomName(roomName);
+        gameData.setPlayerName(playerName);
         gameData.setToUser(jsonObject.getString("fromUser"));
         gameData.setWord(playerWord);
         gameData.setBullsCount(bulls);

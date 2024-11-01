@@ -23,7 +23,7 @@ public final class StompUtil
         HashMap<String,String> map = new HashMap<>();
         map.put("username",username);
         StompClient  mStompClient =
-                Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.29.26:8080/techtweakz-stomp-end-point/websocket",map);
+                Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.1.11:8080/techtweakz-stomp-end-point/websocket",map);
        // Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.0.106:8080/techtweakz-stomp-end-point/websocket",map);
 
      //  mStompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://192.168.43.99:8080/techtweakz-stomp-end-point/websocket");

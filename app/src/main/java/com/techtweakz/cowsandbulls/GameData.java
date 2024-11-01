@@ -11,6 +11,8 @@ public class GameData implements Serializable {
 
     private String roomName;
 
+    private String playerName;
+
     private int cowsCount;
 
     private int bullsCount;
@@ -26,14 +28,23 @@ public class GameData implements Serializable {
      * @param cowsCount
      * @param bullsCount
      */
-    public GameData(String fromUser, String toUser, String word, String roomName, int cowsCount, int bullsCount) {
+    public GameData(String fromUser, String toUser, String word, String roomName,String playerName, int cowsCount, int bullsCount) {
         super();
         this.fromUser = fromUser;
         this.toUser = toUser;
         this.word = word;
         this.roomName = roomName;
+        this.playerName =playerName;
         this.cowsCount = cowsCount;
         this.bullsCount = bullsCount;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     /**
