@@ -1,61 +1,51 @@
 package com.techtweakz.cowsandbulls;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyPagerAdapter extends FragmentStateAdapter {
-    private int numPlayers;
-    private int tabIndex;
-    private String displayWord;
-    private List<PlayerFragment> playerFragments;
+    private final Map<String, PlayerFragment> playerFragments = new HashMap<>();
+    private int nextPosition = 0; // Track the next available position
 
-    public MyPagerAdapter(FragmentActivity fragmentActivity, int numPlayers, int tabIndex, String displayWord) {
+    public MyPagerAdapter(FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.numPlayers = numPlayers;
-        this.displayWord = displayWord;
-        this.tabIndex = tabIndex;
-        playerFragments = new ArrayList<>();
+    }
+
+    public void addOrUpdatePlayerTab(String playerName, String displayWord) {
+        if (playerFragments.containsKey(playerName)) {
+            // Player exists, append the new word
+            playerFragments.get(playerName).updateListViewData(displayWord);
+        } else {
+            // New player, create a new fragment and set the display word
+            PlayerFragment playerFragment = new PlayerFragment();
+            playerFragment.setDisplayWord(displayWord);
+            playerFragments.put(playerName, playerFragment);
+            nextPosition++; // Increment for next position
+        }
+
+        // Notify that the dataset has changed to refresh the tabs
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if (playerFragments.size() > position && playerFragments.get(position) != null) {
-            if (position == tabIndex) {
-                playerFragments.get(position).updateListViewData(displayWord);
-            }
-            return playerFragments.get(position);
-        } else {
-            PlayerFragment playerFragment = new PlayerFragment();
-            Bundle args = new Bundle();
-            if (position == tabIndex) {
-                args.putString("displayWord", displayWord);
-            }
-            playerFragment.setArguments(args);
-
-            while (playerFragments.size() <= position) {
-                playerFragments.add(null);
-            }
-
-            playerFragments.set(position, playerFragment);
-            return playerFragment;
-        }
+        // Return the correct fragment for the player
+        String playerName = getPlayerNameAt(position);
+        return playerFragments.get(playerName);
     }
 
     @Override
     public int getItemCount() {
-        return numPlayers;
+        return playerFragments.size();
+    }
+
+    public String getPlayerNameAt(int position) {
+        return (String) playerFragments.keySet().toArray()[position]; // Get player name by position
     }
 }

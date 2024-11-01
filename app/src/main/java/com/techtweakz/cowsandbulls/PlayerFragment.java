@@ -9,9 +9,6 @@ import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.Collections;
-import java.util.List;
-
 public class PlayerFragment extends Fragment {
 
     private ListView listView;
@@ -25,23 +22,19 @@ public class PlayerFragment extends Fragment {
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1);
         listView.setAdapter(adapter);
 
-        Bundle args = getArguments();
-        if (args != null) {
-            String displayWord = args.getString("displayWord");
-            if (displayWord != null) {
-                updateListViewData(displayWord);
-            }
-        }
-
-            return view;
+        return view;
     }
 
-    // Provide a method to update the ListView content for each player
+    // Method to set the displayWord before the fragment is created
+    public void setDisplayWord(String displayWord) {
+        if (adapter != null) {
+            updateListViewData(displayWord);
+        }
+    }
+
+    // Method to update the ListView content
     public void updateListViewData(String data) {
-        adapter.add(data);
+        adapter.add(data); // Append the new word
         adapter.notifyDataSetChanged();
     }
-
-
 }
-
