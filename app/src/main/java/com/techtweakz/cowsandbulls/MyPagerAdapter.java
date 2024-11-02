@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class MyPagerAdapter extends FragmentStateAdapter {
     private final Map<String, PlayerFragment> playerFragments = new HashMap<>();
-    private int nextPosition = 0; // Track the next available position
+    private int nextPosition = 0;
 
     public MyPagerAdapter(FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -18,24 +18,23 @@ public class MyPagerAdapter extends FragmentStateAdapter {
 
     public void addOrUpdatePlayerTab(String playerName, String displayWord) {
         if (playerFragments.containsKey(playerName)) {
-            // Player exists, append the new word
+            // Player exists, update the existing fragment's data
             playerFragments.get(playerName).updateListViewData(displayWord);
         } else {
-            // New player, create a new fragment and set the display word
+            // Create a new fragment for a new player
             PlayerFragment playerFragment = new PlayerFragment();
             playerFragment.setDisplayWord(displayWord);
             playerFragments.put(playerName, playerFragment);
-            nextPosition++; // Increment for next position
+            nextPosition++;
         }
 
-        // Notify that the dataset has changed to refresh the tabs
+        // Refresh the tabs
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // Return the correct fragment for the player
         String playerName = getPlayerNameAt(position);
         return playerFragments.get(playerName);
     }
@@ -46,6 +45,6 @@ public class MyPagerAdapter extends FragmentStateAdapter {
     }
 
     public String getPlayerNameAt(int position) {
-        return (String) playerFragments.keySet().toArray()[position]; // Get player name by position
+        return (String) playerFragments.keySet().toArray()[position];
     }
 }

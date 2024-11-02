@@ -1,12 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ListView
-        android:id="@+id/listViewPlayer"
+        android:id="@+id/myListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:textColor="#F2F2F2"
-        android:scrollbars="vertical" />
-</RelativeLayout>
+        android:layout_height="match_parent" />
+</LinearLayout>
