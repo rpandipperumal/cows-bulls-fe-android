@@ -40,6 +40,10 @@ public class PlayerFragment extends Fragment {
         adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, displayWords);
         listView.setAdapter(adapter);
 
+        // Set headers for the ListView
+        View header = inflater.inflate(R.layout.row_layout, listView, false);
+        listView.addHeaderView(header);
+
         return rootView;
     }
 }

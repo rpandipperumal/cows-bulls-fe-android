@@ -8,17 +8,20 @@
         android:id="@+id/wordView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Word" />
 
     <TextView
         android:id="@+id/cowsView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Cows" />
 
     <TextView
         android:id="@+id/bullsView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Bulls" />
 </LinearLayout>

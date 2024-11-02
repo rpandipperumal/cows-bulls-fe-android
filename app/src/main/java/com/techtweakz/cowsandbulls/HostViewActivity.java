@@ -77,7 +77,9 @@ public class HostViewActivity extends AppCompatActivity {
                         GameData gameData = sendMessageToPlayer(jsonObject);
 
                         String playerUsername = gameData.getPlayerName();
-                        String displayWord = gameData.getWord() + " Cows: " + gameData.getCowsCount() + " Bulls: " + gameData.getBullsCount();
+                        String displayWord = gameData.getWord() + " | " + gameData.getCowsCount() + " | " + gameData.getBullsCount();
+
+                        //  String displayWord = gameData.getWord() + " Cows: " + gameData.getCowsCount() + " Bulls: " + gameData.getBullsCount();
                         pagerAdapter.addOrUpdatePlayerTab(playerUsername, displayWord);
 
                     } catch (JSONException e) {
