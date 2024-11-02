@@ -118,6 +118,7 @@ public class HostViewActivity extends AppCompatActivity {
 
         GameData gameData = new GameData();
         gameData.setFromUser(hostUsername);
+        gameData.setToUser(jsonObject.getString("fromUser"));
         gameData.setRoomName(roomName);
         gameData.setPlayerName(jsonObject.getString("playerName"));
         gameData.setWord(playerWord);
