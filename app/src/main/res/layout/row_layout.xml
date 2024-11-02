@@ -9,19 +9,22 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Word" />
+        android:text="Word"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/cowsView"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Cows" />
+        android:text="Cows"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/bullsView"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Bulls" />
+        android:text="Bulls"
+        android:gravity="center" />
 </LinearLayout>
